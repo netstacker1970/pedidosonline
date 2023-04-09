@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20230409173149",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "caixa",
+  "fields": [
+    {
+      "fieldName": "saldoinicio",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "saldoFim",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "dtAbertura",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dtFechamento",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "valor",
+      "fieldType": "Float"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Caixa",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

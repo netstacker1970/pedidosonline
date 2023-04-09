@@ -48,6 +48,15 @@ public class CacheConfiguration {
             createCache(cm, br.pedidosonline.domain.User.class.getName());
             createCache(cm, br.pedidosonline.domain.Authority.class.getName());
             createCache(cm, br.pedidosonline.domain.User.class.getName() + ".authorities");
+            createCache(cm, br.pedidosonline.domain.Cliente.class.getName());
+            createCache(cm, br.pedidosonline.domain.Caixa.class.getName());
+            createCache(cm, br.pedidosonline.domain.Pagamento.class.getName());
+            createCache(cm, br.pedidosonline.domain.Conta.class.getName());
+            createCache(cm, br.pedidosonline.domain.ItemConta.class.getName());
+            createCache(cm, br.pedidosonline.domain.Cardapio.class.getName());
+            createCache(cm, br.pedidosonline.domain.ItemCardapio.class.getName());
+            createCache(cm, br.pedidosonline.domain.Produto.class.getName());
+            createCache(cm, br.pedidosonline.domain.Categoria.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

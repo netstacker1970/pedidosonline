@@ -1,0 +1,26 @@
+{
+  "applications": "*",
+  "changelogDate": "20230409173154",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "item_cardapio",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ItemCardapio",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "cardapio",
+      "relationshipName": "cardapio",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "produto",
+      "relationshipName": "produto",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

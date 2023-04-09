@@ -74,9 +74,9 @@ relationship ManyToOne {
 
 
 
-// Set pagination options
-paginate JobHistory, Employee with infinite-scroll
-paginate Job with pagination
+
+paginate Cardapio with infinite-scroll
+
 
 // Use Data Transfer Objects (DTO)
 // dto * with mapstruct

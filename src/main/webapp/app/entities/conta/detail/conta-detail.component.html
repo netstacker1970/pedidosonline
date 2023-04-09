@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="conta">
+      <h2 data-cy="contaDetailsHeading"><span jhiTranslate="pedidosOnlineApp.conta.detail.title">Conta</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">Código</span></dt>
+        <dd>
+          <span>{{ conta.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedidosOnlineApp.conta.dtConta">Dt Conta</span></dt>
+        <dd>
+          <span>{{ conta.dtConta | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedidosOnlineApp.conta.valorConta">Valor Conta</span></dt>
+        <dd>
+          <span>{{ conta.valorConta }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedidosOnlineApp.conta.cliente">Cliente</span></dt>
+        <dd>
+          <div *ngIf="conta.cliente">
+            <a [routerLink]="['/cliente', conta.cliente.id, 'view']">{{ conta.cliente.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedidosOnlineApp.conta.caixa">Caixa</span></dt>
+        <dd>
+          <div *ngIf="conta.caixa">
+            <a [routerLink]="['/caixa', conta.caixa.id, 'view']">{{ conta.caixa.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+      </button>
+
+      <button type="button" [routerLink]="['/conta', conta.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

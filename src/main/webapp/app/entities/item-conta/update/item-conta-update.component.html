@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-item-conta-heading"
+        data-cy="ItemContaCreateUpdateHeading"
+        jhiTranslate="pedidosOnlineApp.itemConta.home.createOrEditLabel"
+      >
+        Criar ou editar Item Conta
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pedidosOnlineApp.itemConta.valorConta" for="field_valorConta">Valor Conta</label>
+          <input
+            type="number"
+            class="form-control"
+            name="valorConta"
+            id="field_valorConta"
+            data-cy="valorConta"
+            formControlName="valorConta"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pedidosOnlineApp.itemConta.produto" for="field_produto">Produto</label>
+          <select
+            class="form-control"
+            id="field_produto"
+            data-cy="produto"
+            name="produto"
+            formControlName="produto"
+            [compareWith]="compareProduto"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="produtoOption" *ngFor="let produtoOption of produtosSharedCollection">{{ produtoOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pedidosOnlineApp.itemConta.itemCardapio" for="field_itemCardapio">Item Cardapio</label>
+          <select
+            class="form-control"
+            id="field_itemCardapio"
+            data-cy="itemCardapio"
+            name="itemCardapio"
+            formControlName="itemCardapio"
+            [compareWith]="compareItemCardapio"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="itemCardapioOption" *ngFor="let itemCardapioOption of itemCardapiosSharedCollection">
+              {{ itemCardapioOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pedidosOnlineApp.itemConta.conta" for="field_conta">Conta</label>
+          <select class="form-control" id="field_conta" data-cy="conta" name="conta" formControlName="conta" [compareWith]="compareConta">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="contaOption" *ngFor="let contaOption of contasSharedCollection">{{ contaOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

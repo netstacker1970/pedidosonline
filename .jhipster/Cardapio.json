@@ -1,0 +1,20 @@
+{
+  "applications": "*",
+  "changelogDate": "20230409173153",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cardapio",
+  "fields": [
+    {
+      "fieldName": "dtCardapio",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Cardapio",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

@@ -1,0 +1,27 @@
+{
+  "pedidosOnlineApp": {
+    "itemConta": {
+      "home": {
+        "title": "Item Contas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Item Conta",
+        "createOrEditLabel": "Create or edit a Item Conta",
+        "notFound": "No Item Contas found"
+      },
+      "created": "A new Item Conta is created with identifier {{ param }}",
+      "updated": "A Item Conta is updated with identifier {{ param }}",
+      "deleted": "A Item Conta is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Item Conta {{ id }}?"
+      },
+      "detail": {
+        "title": "Item Conta"
+      },
+      "id": "ID",
+      "valorConta": "Valor Conta",
+      "produto": "Produto",
+      "itemCardapio": "Item Cardapio",
+      "conta": "Conta"
+    }
+  }
+}
