@@ -1,0 +1,88 @@
+
+entity Cliente{
+	nome String,
+}
+
+entity Caixa {
+	saldoinicio Float,
+    saldoFim Float,
+    dtAbertura LocalDate,
+    dtFechamento LocalDate,
+    valor Float
+}
+
+entity Pagamento{
+	valor Float,
+    dtPagamento LocalDate
+}
+
+entity Conta{
+	dtConta LocalDate,
+    valorConta Float,
+}
+
+entity ItemConta{
+    valorConta Float,
+}
+
+entity Cardapio{
+	dtCardapio LocalDate
+}
+
+entity ItemCardapio{
+}
+
+entity Produto{
+	produto LocalDate,
+    image ImageBlob,
+}
+
+entity Categoria{
+	categoria String,
+}
+
+
+
+relationship ManyToOne {
+	ItemConta{produto} to Produto,
+    ItemConta{itemCardapio} to ItemCardapio
+    ItemConta{conta} to Conta
+}
+
+relationship ManyToOne {
+	Pagamento{conta} to Conta,
+}
+
+relationship ManyToOne {
+	Produto{categoria} to Categoria,
+}
+
+relationship ManyToOne {
+	Conta{cliente} to Cliente,
+	Conta{caixa} to Caixa,
+}
+
+relationship ManyToOne {
+	Pagamento{cliente} to Conta,
+}
+
+relationship ManyToOne {
+	ItemCardapio{cardapio} to Cardapio,
+    ItemCardapio{produto} to Produto
+}
+
+
+
+
+// Set pagination options
+paginate JobHistory, Employee with infinite-scroll
+paginate Job with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+//service all with serviceImpl except Employee, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
