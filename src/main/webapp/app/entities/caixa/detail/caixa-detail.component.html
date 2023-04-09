@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="caixa">
+      <h2 data-cy="caixaDetailsHeading"><span jhiTranslate="pedidosOnlineApp.caixa.detail.title">Caixa</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">Código</span></dt>
+        <dd>
+          <span>{{ caixa.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedidosOnlineApp.caixa.saldoinicio">Saldoinicio</span></dt>
+        <dd>
+          <span>{{ caixa.saldoinicio }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedidosOnlineApp.caixa.saldoFim">Saldo Fim</span></dt>
+        <dd>
+          <span>{{ caixa.saldoFim }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedidosOnlineApp.caixa.dtAbertura">Dt Abertura</span></dt>
+        <dd>
+          <span>{{ caixa.dtAbertura | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedidosOnlineApp.caixa.dtFechamento">Dt Fechamento</span></dt>
+        <dd>
+          <span>{{ caixa.dtFechamento | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedidosOnlineApp.caixa.valor">Valor</span></dt>
+        <dd>
+          <span>{{ caixa.valor }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+      </button>
+
+      <button type="button" [routerLink]="['/caixa', caixa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

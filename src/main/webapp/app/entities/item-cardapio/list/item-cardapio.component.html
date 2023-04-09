@@ -1,0 +1,103 @@
+<div>
+  <h2 id="page-heading" data-cy="ItemCardapioHeading">
+    <span jhiTranslate="pedidosOnlineApp.itemCardapio.home.title">Item Cardapios</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pedidosOnlineApp.itemCardapio.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-item-cardapio"
+        [routerLink]="['/item-cardapio/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pedidosOnlineApp.itemCardapio.home.createLabel"> Criar novo Item Cardapio </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="itemCardapios?.length === 0">
+    <span jhiTranslate="pedidosOnlineApp.itemCardapio.home.notFound">Nenhum Item Cardapio encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="itemCardapios && itemCardapios.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">Código</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cardapio.id">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.itemCardapio.cardapio">Cardapio</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="produto.id">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.itemCardapio.produto">Produto</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let itemCardapio of itemCardapios; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/item-cardapio', itemCardapio.id, 'view']">{{ itemCardapio.id }}</a>
+          </td>
+          <td>
+            <div *ngIf="itemCardapio.cardapio">
+              <a [routerLink]="['/cardapio', itemCardapio.cardapio.id, 'view']">{{ itemCardapio.cardapio.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="itemCardapio.produto">
+              <a [routerLink]="['/produto', itemCardapio.produto.id, 'view']">{{ itemCardapio.produto.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/item-cardapio', itemCardapio.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/item-cardapio', itemCardapio.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(itemCardapio)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

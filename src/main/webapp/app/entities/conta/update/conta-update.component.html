@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-conta-heading" data-cy="ContaCreateUpdateHeading" jhiTranslate="pedidosOnlineApp.conta.home.createOrEditLabel">
+        Criar ou editar Conta
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pedidosOnlineApp.conta.dtConta" for="field_dtConta">Dt Conta</label>
+          <div class="input-group">
+            <input
+              id="field_dtConta"
+              data-cy="dtConta"
+              type="text"
+              class="form-control"
+              name="dtConta"
+              ngbDatepicker
+              #dtContaDp="ngbDatepicker"
+              formControlName="dtConta"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dtContaDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pedidosOnlineApp.conta.valorConta" for="field_valorConta">Valor Conta</label>
+          <input
+            type="number"
+            class="form-control"
+            name="valorConta"
+            id="field_valorConta"
+            data-cy="valorConta"
+            formControlName="valorConta"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pedidosOnlineApp.conta.cliente" for="field_cliente">Cliente</label>
+          <select
+            class="form-control"
+            id="field_cliente"
+            data-cy="cliente"
+            name="cliente"
+            formControlName="cliente"
+            [compareWith]="compareCliente"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="clienteOption" *ngFor="let clienteOption of clientesSharedCollection">{{ clienteOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pedidosOnlineApp.conta.caixa" for="field_caixa">Caixa</label>
+          <select class="form-control" id="field_caixa" data-cy="caixa" name="caixa" formControlName="caixa" [compareWith]="compareCaixa">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="caixaOption" *ngFor="let caixaOption of caixasSharedCollection">{{ caixaOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

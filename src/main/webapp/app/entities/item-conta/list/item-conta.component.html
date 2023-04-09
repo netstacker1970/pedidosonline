@@ -1,0 +1,121 @@
+<div>
+  <h2 id="page-heading" data-cy="ItemContaHeading">
+    <span jhiTranslate="pedidosOnlineApp.itemConta.home.title">Item Contas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pedidosOnlineApp.itemConta.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-item-conta"
+        [routerLink]="['/item-conta/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pedidosOnlineApp.itemConta.home.createLabel"> Criar novo Item Conta </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="itemContas?.length === 0">
+    <span jhiTranslate="pedidosOnlineApp.itemConta.home.notFound">Nenhum Item Conta encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="itemContas && itemContas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">Código</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="valorConta">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.itemConta.valorConta">Valor Conta</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="produto.id">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.itemConta.produto">Produto</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="itemCardapio.id">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.itemConta.itemCardapio">Item Cardapio</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="conta.id">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.itemConta.conta">Conta</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let itemConta of itemContas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/item-conta', itemConta.id, 'view']">{{ itemConta.id }}</a>
+          </td>
+          <td>{{ itemConta.valorConta }}</td>
+          <td>
+            <div *ngIf="itemConta.produto">
+              <a [routerLink]="['/produto', itemConta.produto.id, 'view']">{{ itemConta.produto.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="itemConta.itemCardapio">
+              <a [routerLink]="['/item-cardapio', itemConta.itemCardapio.id, 'view']">{{ itemConta.itemCardapio.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="itemConta.conta">
+              <a [routerLink]="['/conta', itemConta.conta.id, 'view']">{{ itemConta.conta.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/item-conta', itemConta.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/item-conta', itemConta.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(itemConta)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

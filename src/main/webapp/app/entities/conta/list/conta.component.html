@@ -1,0 +1,107 @@
+<div>
+  <h2 id="page-heading" data-cy="ContaHeading">
+    <span jhiTranslate="pedidosOnlineApp.conta.home.title">Contas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pedidosOnlineApp.conta.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-conta"
+        [routerLink]="['/conta/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pedidosOnlineApp.conta.home.createLabel"> Criar novo Conta </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="contas?.length === 0">
+    <span jhiTranslate="pedidosOnlineApp.conta.home.notFound">Nenhum Conta encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="contas && contas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">Código</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dtConta">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.conta.dtConta">Dt Conta</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="valorConta">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.conta.valorConta">Valor Conta</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cliente.id">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.conta.cliente">Cliente</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="caixa.id">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.conta.caixa">Caixa</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let conta of contas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/conta', conta.id, 'view']">{{ conta.id }}</a>
+          </td>
+          <td>{{ conta.dtConta | formatMediumDate }}</td>
+          <td>{{ conta.valorConta }}</td>
+          <td>
+            <div *ngIf="conta.cliente">
+              <a [routerLink]="['/cliente', conta.cliente.id, 'view']">{{ conta.cliente.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="conta.caixa">
+              <a [routerLink]="['/caixa', conta.caixa.id, 'view']">{{ conta.caixa.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/conta', conta.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/conta', conta.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(conta)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

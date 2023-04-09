@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20230409173152",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "item_conta",
+  "fields": [
+    {
+      "fieldName": "valorConta",
+      "fieldType": "Float"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ItemConta",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "produto",
+      "relationshipName": "produto",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "itemCardapio",
+      "relationshipName": "itemCardapio",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "conta",
+      "relationshipName": "conta",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

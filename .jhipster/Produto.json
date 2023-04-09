@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20230409173155",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "produto",
+  "fields": [
+    {
+      "fieldName": "produto",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Produto",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "categoria",
+      "relationshipName": "categoria",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

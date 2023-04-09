@@ -1,0 +1,117 @@
+<div>
+  <h2 id="page-heading" data-cy="PagamentoHeading">
+    <span jhiTranslate="pedidosOnlineApp.pagamento.home.title">Pagamentos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pedidosOnlineApp.pagamento.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-pagamento"
+        [routerLink]="['/pagamento/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pedidosOnlineApp.pagamento.home.createLabel"> Criar novo Pagamento </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="pagamentos?.length === 0">
+    <span jhiTranslate="pedidosOnlineApp.pagamento.home.notFound">Nenhum Pagamento encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="pagamentos && pagamentos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">Código</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="valor">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.pagamento.valor">Valor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dtPagamento">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.pagamento.dtPagamento">Dt Pagamento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="conta.id">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.pagamento.conta">Conta</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cliente.id">
+            <div class="d-flex">
+              <span jhiTranslate="pedidosOnlineApp.pagamento.cliente">Cliente</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pagamento of pagamentos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/pagamento', pagamento.id, 'view']">{{ pagamento.id }}</a>
+          </td>
+          <td>{{ pagamento.valor }}</td>
+          <td>{{ pagamento.dtPagamento | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="pagamento.conta">
+              <a [routerLink]="['/conta', pagamento.conta.id, 'view']">{{ pagamento.conta.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="pagamento.cliente">
+              <a [routerLink]="['/conta', pagamento.cliente.id, 'view']">{{ pagamento.cliente.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/pagamento', pagamento.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/pagamento', pagamento.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(pagamento)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

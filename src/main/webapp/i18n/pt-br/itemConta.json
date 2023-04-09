@@ -1,0 +1,27 @@
+{
+  "pedidosOnlineApp": {
+    "itemConta": {
+      "home": {
+        "title": "Item Contas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Item Conta",
+        "createOrEditLabel": "Criar ou editar Item Conta",
+        "notFound": "Nenhum Item Conta encontrado"
+      },
+      "created": "Um novo Item Conta foi criado com o identificador {{ param }}",
+      "updated": "Um Item Conta foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Item Conta foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Item Conta {{ id }}?"
+      },
+      "detail": {
+        "title": "Item Conta"
+      },
+      "id": "ID",
+      "valorConta": "Valor Conta",
+      "produto": "Produto",
+      "itemCardapio": "Item Cardapio",
+      "conta": "Conta"
+    }
+  }
+}
